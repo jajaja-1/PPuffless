@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, #00ffff, #ffffff);
+            color: #01579b;
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #0288d1;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background: linear-gradient(#0000cd, #87cefa);
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0277bd;
+        }
+
+        #back-button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background: linear-gradient(#0000cd, #87cefa);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+
+        #back-button:hover {
+            background: linear-gradient(#0000cd, #87cefa);
+        }
+    </style>
+</head>
+<body>
+    <h2>Settings</h2>
+
+    <!-- Ввод лимита -->
+    <input id="limit-input" type="number" placeholder="Enter click limit" />
+    <button id="save-limit-button">подтвердите лимит</button>
+
+    <!-- Кнопки сброса -->
+    <button id="reset-counter-button">Сброс тяг</button>
+    <button id="reset-limit-button">Сброс лимита</button>
+
+    <!-- Кнопка для возврата на основную страницу -->
+    <button id="back-button" onclick="window.location.href='index.html'">Вернутся на главную</button>
+
+    <script>
+        // Сохранение лимита в localStorage
+        document.getElementById('save-limit-button').addEventListener('click', () => {
+            const limit = parseInt(document.getElementById('limit-input').value, 10);
+            if (!isNaN(limit) && limit > 0) {
+                localStorage.setItem('limit', limit);
+                alert('Limit has been set');
+            } else {
+                alert('Please enter a valid limit.');
+            }
+        });
+
+        // Сброс счётчика
+        document.getElementById('reset-counter-button').addEventListener('click', () => {
+            localStorage.setItem('counter', 0);
+            alert('Counter has been reset');
+        });
+
+        // Сброс лимита
+        document.getElementById('reset-limit-button').addEventListener('click', () => {
+            localStorage.removeItem('limit');
+            alert('Limit has been reset');
+        });
+    </script>
+</body>
+</html>
